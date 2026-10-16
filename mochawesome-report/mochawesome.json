@@ -1,0 +1,157 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-10-16T09:12:49.198Z",
+    "end": "2026-10-16T09:12:51.344Z",
+    "duration": 2146,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6042ae19-2b6b-4580-a059-88870295328b",
+      "title": "",
+      "fullFile": "C:\\Users\\LENOVO\\Documents\\homeworkApiAutomation\\homework\\homework.js",
+      "file": "\\homework\\homework.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e73b1ce6-b232-40b5-919c-c30bcfc1fb36",
+          "title": "Belajar Bareng API",
+          "fullFile": "C:\\Users\\LENOVO\\Documents\\homeworkApiAutomation\\homework\\homework.js",
+          "file": "\\homework\\homework.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "POST /api/login — login berhasil dan menyimpan token",
+              "fullTitle": "Belajar Bareng API POST /api/login — login berhasil dan menyimpan token",
+              "timedOut": false,
+              "duration": 450,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await sendRequest('/api/login', {\n  method: 'POST',\n  body: { username: API_USERNAME, password: API_PASSWORD },\n});\nassert.equal(response.status, 200, 'status HTTP login harus 200');\ntoken = response.body && response.body.token;\nassert.ok(\n  response.body &&\n    response.body.status === 200 &&\n    typeof token === 'string' &&\n    token.length > 0,\n  'response body login harus memuat status 200 dan token'\n);",
+              "err": {},
+              "uuid": "88b874f0-e33f-4f06-b49c-7b269188bdda",
+              "parentUUID": "e73b1ce6-b232-40b5-919c-c30bcfc1fb36",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "GET /api/users — mengambil daftar user dengan token login",
+              "fullTitle": "Belajar Bareng API GET /api/users — mengambil daftar user dengan token login",
+              "timedOut": false,
+              "duration": 422,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await sendRequest('/api/users', {\n  headers: { Authorization: `Bearer ${token}` },\n});\nassert.equal(response.status, 200, 'status HTTP get users harus 200');\nassert.ok(\n  response.body &&\n    response.body.status === 200 &&\n    Array.isArray(response.body.users),\n  'response body harus memuat status 200 dan array users'\n);",
+              "err": {},
+              "uuid": "89e9c608-843c-4230-80cb-218597b6bbc2",
+              "parentUUID": "e73b1ce6-b232-40b5-919c-c30bcfc1fb36",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST /api/add-user — positive case, menambahkan user",
+              "fullTitle": "Belajar Bareng API POST /api/add-user — positive case, menambahkan user",
+              "timedOut": false,
+              "duration": 608,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const payload = {\n  username: `tia${Date.now()}`,\n  age: 28,\n};\nconst response = await sendRequest('/api/add-user', {\n  method: 'POST',\n  headers: { Authorization: `Bearer ${token}` },\n  body: payload,\n});\nassert.equal(response.status, 201, 'status HTTP add user positif harus 201');\nassert.ok(\n  response.body &&\n    response.body.status === 201 &&\n    typeof response.body.userId === 'string' &&\n    response.body.username === payload.username,\n  'response body harus memuat status 201, userId, dan username yang dikirim'\n);",
+              "err": {},
+              "uuid": "49a98705-1706-4002-bacf-5604559cd615",
+              "parentUUID": "e73b1ce6-b232-40b5-919c-c30bcfc1fb36",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "POST /api/add-user — negative case, token tidak valid ditolak",
+              "fullTitle": "Belajar Bareng API POST /api/add-user — negative case, token tidak valid ditolak",
+              "timedOut": false,
+              "duration": 655,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await sendRequest('/api/add-user', {\n  method: 'POST',\n  headers: { Authorization: 'Bearer invalid-token-for-test' },\n  body: { username: `tia${Date.now()}`, age: 28 },\n});\nassert.equal(response.status, 403, 'status HTTP add user dengan token invalid harus 403');\nassert.ok(\n  response.body &&\n    ((typeof response.body === 'object' &&\n      (typeof response.body.message === 'string' || typeof response.body.error === 'string')) ||\n      (typeof response.body === 'string' && response.body.trim().length > 0)),\n  'response body penolakan harus berisi pesan error'\n);",
+              "err": {},
+              "uuid": "472183ee-dc02-4cc9-a41d-4296392aefe1",
+              "parentUUID": "e73b1ce6-b232-40b5-919c-c30bcfc1fb36",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "88b874f0-e33f-4f06-b49c-7b269188bdda",
+            "89e9c608-843c-4230-80cb-218597b6bbc2",
+            "49a98705-1706-4002-bacf-5604559cd615",
+            "472183ee-dc02-4cc9-a41d-4296392aefe1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2135,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 30000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "12.0.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
